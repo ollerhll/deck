@@ -24,6 +24,7 @@ module.exports = angular.module('netflix.spinnaker', [
   require('./modules/kubernetes/kubernetes.module.js'),
   require('./modules/openstack/openstack.module.js'),
   require('./modules/docker/docker.module.js'),
+  require('./modules/oracle/oraclebmcs.module.js'),
   APPENGINE_MODULE,
   AUTHENTICATION_SERVICE,
   ...DOWNGRADED_MODULE_NAMES,

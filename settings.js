@@ -14,7 +14,7 @@ var debugEnabled = process.env.DEBUG_ENABLED === 'false' ? false : true;
 window.spinnakerSettings = {
   checkForUpdates: true,
   debugEnabled: debugEnabled,
-  defaultProviders: ['aws', 'gce', 'azure', 'cf', 'kubernetes', 'titus', 'openstack'],
+  defaultProviders: ['aws', 'gce', 'azure', 'cf', 'kubernetes', 'titus', 'openstack', 'oraclebmcs'],
   feedbackUrl: feedbackUrl,
   gateUrl: gateHost,
   bakeryDetailUrl: bakeryDetailUrl,
@@ -63,6 +63,12 @@ window.spinnakerSettings = {
         account: 'test',
         region: 'us-west-1'
       },
+    },
+    oraclebmcs: {
+      defaults: {
+        account: 'DEFAULT',
+        region: 'us-phoenix-1'
+      }
     },
     kubernetes: {
       defaults: {
