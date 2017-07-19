@@ -34,6 +34,10 @@ module.exports = angular.module('spinnaker.oraclebmcs', [
   require('./image/image.reader.js'),
   // Instances
   require('./instance/details/instance.details.controller.js'),
+  // Load balancer
+  require('./loadBalancer/loadBalancer.transformer.js'),
+  require('./loadBalancer/configure/createLoadBalancer.controller.js'),
+  require('./loadBalancer/details/loadBalancerDetails.controller.js'),
   // Security Groups
   require('./securityGroup/securityGroup.reader.js'),
   require('./securityGroup/securityGroup.transformer.js'),
@@ -49,6 +53,11 @@ module.exports = angular.module('spinnaker.oraclebmcs', [
         reader: 'oraclebmcsImageReader',
       },
       loadBalancer: {
+        transformer: 'oraclebmcsLoadBalancerTransformer',
+        detailsTemplateUrl: require('./loadBalancer/details/loadBalancerDetail.html'),
+        detailsController: 'oraclebmcsLoadBalancerDetailsCtrl',
+        createLoadBalancerTemplateUrl: require('./loadBalancer/configure/createLoadBalancer.html'),
+        createLoadBalancerController: 'oraclebmcsCreateLoadBalancerCtrl',
       },
       serverGroup: {
         transformer: 'oraclebmcsServerGroupTransformer',

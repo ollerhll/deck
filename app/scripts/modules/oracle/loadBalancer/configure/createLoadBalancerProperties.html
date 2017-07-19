@@ -1,0 +1,28 @@
+<div class="container-fluid form-horizontal">
+  <div ng-if="!state.accountsLoaded" style="height: 200px">
+    <h3 us-spinner="{radius:30, width:8, length: 16}"></h3>
+  </div>
+
+  <div class="modal-body" ng-if="state.accountsLoaded">
+    <div class="form-group">
+      <div class="col-md-3 sm-label-right">Account</div>
+      <div class="col-md-7">
+        <account-select-field
+        component="loadBalancer"
+        field="account"
+        accounts="accounts"
+        provider="'oraclebmcs'"
+        on-change="ctrl.accountUpdated()"></account-select-field>
+      </div>
+    </div>
+
+    <region-select-field
+    label-columns="3"
+    component="loadBalancer"
+    field="region"
+    account="loadBalancer.credentials"
+    provider="'oraclebmcs'"
+    on-change="ctrl.regionUpdated()"
+    regions="regions"></region-select-field>
+  </div>
+</div>
