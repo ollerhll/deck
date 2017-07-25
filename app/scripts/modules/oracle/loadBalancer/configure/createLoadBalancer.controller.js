@@ -90,12 +90,13 @@ module.exports = angular.module('spinnaker.oraclebmcs.loadBalancer.create.contro
 
     ctrl.submit = function () {
       let descriptor = isNew ? 'Create' : 'Update';
+
       $scope.taskMonitor.submit(
         function() {
             let params = {
                 cloudProvider: provider,
                 appName: application.name,
-                loadBalancerName: $scope.loadBalancer.name || 'my-loadbalancer'
+                loadBalancerName: $scope.loadBalancer.name
           };
             return loadBalancerWriter.upsertLoadBalancer($scope.loadBalancer, application, descriptor, params);
         }
