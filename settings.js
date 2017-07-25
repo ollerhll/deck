@@ -62,7 +62,7 @@ window.spinnakerSettings = {
     },
     oraclebmcs: {
       defaults: {
-        account: 'DEFAULT',
+        account: 'default',
         region: 'us-phoenix-1',
         bakeryRegions: ['us-phoenix-1']
       }

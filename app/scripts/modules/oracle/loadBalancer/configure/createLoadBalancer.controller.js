@@ -34,6 +34,16 @@ module.exports = angular.module('spinnaker.oraclebmcs.loadBalancer.create.contro
       accountsLoaded: false,
     };
 
+    this.updateName = function() {
+      $scope.loadBalancer.name = this.getName();
+    };
+
+    this.getName = function() {
+      let lb = $scope.loadBalancer;
+      let lbName = [application.name, (lb.stack || ''), (lb.detail || '')].join('-');
+      return _.trimEnd(lbName, '-');
+    };
+
     function onApplicationRefresh() {
       // If the user has already closed the modal, do not navigate to the new details view
       if ($scope.$$destroyed) {
@@ -54,10 +64,14 @@ module.exports = angular.module('spinnaker.oraclebmcs.loadBalancer.create.contro
       onTaskComplete: onTaskComplete,
     });
 
-    ctrl.accountUpdated = function () {
+    this.accountUpdated = function () {
       accountService.getRegionsForAccount($scope.loadBalancer.account).then(regions => {
         $scope.regions = regions;
       });
+    };
+
+    this.regionUpdated = function() {
+      ctrl.updateName();
     };
 
     function loadAccounts() {
@@ -67,7 +81,6 @@ module.exports = angular.module('spinnaker.oraclebmcs.loadBalancer.create.contro
       });
     }
 
-    /** Bootstrap all data */
     function initializeController() {
       loadAccounts();
       $scope.loadBalancer = oraclebmcsLoadBalancerTransformer.constructNewLoadBalancerTemplate(application);
@@ -77,19 +90,20 @@ module.exports = angular.module('spinnaker.oraclebmcs.loadBalancer.create.contro
 
     ctrl.submit = function () {
       let descriptor = isNew ? 'Create' : 'Update';
+
       $scope.taskMonitor.submit(
         function() {
             let params = {
                 cloudProvider: provider,
                 appName: application.name,
-                loadBalancerName: $scope.loadBalancer.name || 'my-loadbalancer'
+                loadBalancerName: $scope.loadBalancer.name
           };
             return loadBalancerWriter.upsertLoadBalancer($scope.loadBalancer, application, descriptor, params);
         }
       );
     };
 
-    ctrl.cancel = function () {
+    this.cancel = function () {
       $uibModalInstance.dismiss();
     };
   });

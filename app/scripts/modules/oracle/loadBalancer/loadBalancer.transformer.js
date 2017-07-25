@@ -14,8 +14,6 @@ module.exports = angular.module('spinnaker.oraclebmcs.loadBalancer.transformer',
     function constructNewLoadBalancerTemplate() {
       return {
         provider: 'oraclebmcs',
-        stack: '',
-        detail: '',
         credentials: OracleBMCSProviderSettings.defaults.account,
         region: OracleBMCSProviderSettings.defaults.region,
         healthCheckProtocol: 'HTTP',
